@@ -1,10 +1,12 @@
 package view;
 
 import java.util.List;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import util.WordlistGeneratorAB;
+import util.WordlistWriter;
 
 public class App {
 
@@ -22,8 +24,18 @@ public class App {
 		WordlistGeneratorAB generator = new WordlistGeneratorAB();
 		List<String> wordlist = generator.generate(conjuntoA, quantA, conjuntoB, quantB);
 		
-		printWordlist(wordlist, 15);
-		System.out.println("Quant.: " + wordlist.size());
+		WordlistWriter writer = new WordlistWriter();
+		try {
+			writer.write(wordlist);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			writer.close();
+		}
+		
+		//printWordlist(wordlist, 15);
+		//System.out.println("Quant.: " + wordlist.size());
 		
 	}
 	
